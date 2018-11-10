@@ -1,57 +1,91 @@
 <template>
-  <div class="scroll-button" @click="clicked()">
-    <div class="percentage"/>
-    <slot class="scroll-content" name="content"/>
+  <div class="scroll-button">
+    <template v-if="showPercent">
+      {{ percent | formatPercent }}
+    </template>
+    <div v-else>
+      <slot v-if="percent >= .99" name="completed"/>
+      <slot
+        v-else
+        class="scroll-content" 
+        name="content"/>
+    </div>
+    <div class="progress-bar"/>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import ProgressBar from 'progressbar.js';
 
-@Component
+@Component({
+  filters: {
+    formatPercent(value: number): string {
+      return `${Math.round(value * 100)}%`;
+    },
+  },
+})
 export default class ScrollButton extends Vue {
+  @Prop({default: 'green'})
+  progressColor!: string;
 
-  clicked(): void {
-    this.$emit('clicked!');
+  @Prop()
+  showPercent!: boolean;
+
+  circle: any;
+  percent: number = 0;
+
+  created(): void {
+    window.addEventListener('scroll', this.setProgress);
+  }
+
+  mounted(): void {
+    this.circle = new ProgressBar.Circle('.progress-bar', {
+      color: this.progressColor,
+      duration: 3000,
+      easing: 'easeInOut',
+    });
+  }
+
+  destroyed(): void {
+    window.removeEventListener('scroll', this.setProgress);
+  }
+
+  progress(): any {
+    let progress = 0;
+    const h = document.documentElement;
+    const body = document.body;
+    const st = 'scrollTop';
+    const sh = 'scrollHeight';
+
+    if (h && body) {
+      progress = (h[st] || body[st]) / ((h[sh] || body[sh]) - h.clientHeight);
+    }
+
+    return progress;
+  }
+
+  setProgress(): void {
+    this.circle.set(this.progress());
+    this.percent = this.progress();
+    console.log('percent', this.percent)
   }
 }
 </script>
 
 <style scoped lang="scss">
-.scroll-button {
-  background: #97c83e;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-  font-size: 35px;
-  font-weight: bold;
-  color: white;
-}
+  .scroll-button {
+    background: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-.percentage {
-	overflow: hidden;
-	position: absolute;
-	top: -1em; 
-  right: 50%; 
-  bottom: 50%; 
-  left: -1em;
-	transform-origin: 100% 100%;
-	transform: rotate(45deg) skewX(30deg);
-}
-
-.percentage:before {
-	box-sizing: border-box;
-	display: block;
-	border: solid 1em navy;
-	width: 200%; 
-  height: 200%;
-	border-radius: 50%;
-	transform: skewX(-30deg);
-	content: '';
-}
+  .progress-bar {
+    position: absolute;
+  }
 </style>
