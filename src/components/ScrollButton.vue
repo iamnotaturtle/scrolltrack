@@ -19,7 +19,7 @@ import ProgressBar from '@/components/ProgressBar.vue';
   },
 })
 export default class ScrollButton extends Vue {
-  @Prop({default: 'green'})
+  @Prop()
   progressColor!: string;
 
   progress(value: number) {
