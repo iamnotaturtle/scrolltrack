@@ -76,6 +76,7 @@ export default class App extends Vue {
     right: calc(100vw - 30px);
     top: 3px;
   }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -83,13 +84,6 @@ export default class App extends Vue {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-  }
-
-  .icon {
-    color: blue;
-    text-decoration: none;
-    font-size: 25px;
-    font-weight: bold;
   }
 
   .button {
