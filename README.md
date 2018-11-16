@@ -2,7 +2,7 @@
 A button that tracks your scroll progress. Inspired by TechCrunch's progress button. Uses [ProgressBar.js](https://github.com/kimmobrunfeldt/progressbar.js).
 
 ## Demo
-[Add link]()
+Checkout demo [here](https://iamnotaturtle.github.io/scrolltrack/)
 
 ```html
 <ScrollTrack
