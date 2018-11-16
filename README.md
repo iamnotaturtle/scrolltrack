@@ -1,34 +1,21 @@
 # scrolltrack
+A button that tracks your scroll progress. Inspired by TechCrunch's progress button. Uses [ProgressBar.js](https://github.com/kimmobrunfeldt/progressbar.js).
+
+## Demo
+[Add link]()
+
+```html
+<ScrollTrack
+    progressColor="blue"
+    @progress="handleProgress">
+  <slot name="content">
+    X
+  </slot>
+</ScrollTrack>
+```
 
 ## Project setup
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn run serve
 ```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

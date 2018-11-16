@@ -1,1 +1,1 @@
-declare module 'progress-bar.js';
+declare module 'progressbar.js';
