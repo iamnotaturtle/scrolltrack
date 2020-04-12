@@ -17,5 +17,5 @@ Checkout demo [here](https://iamnotaturtle.github.io/scrolltrack/)
 ## Project setup
 ```
 yarn install
-yarn run serve
+yarn serve
 ```
