@@ -4,6 +4,9 @@ A button that tracks your scroll progress. Inspired by TechCrunch's progress but
 ## Demo
 Checkout demo [here](https://iamnotaturtle.github.io/scrolltrack/)
 
+![Scroll Track Demo](./scroll-track.gif)
+
+## Usage
 ```html
 <ScrollTrack
     progressColor="blue"
